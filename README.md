@@ -7,7 +7,6 @@
 | nickname              | string | null: false              |
 | email                 | string | null: false, unique: true|
 | encrypted_password    | string | null: false              |
-| password_confirmation | string | null: false              |
 | family_name           | string | null: false              |
 | first_name            | string | null: false              |
 | family_name_kana      | string | null: false              |
@@ -21,17 +20,17 @@
 
 ## items テーブル
 
-| Column             | Type       | Options           |
-| ------------------ | ---------- | ----------------- |
-| name               | string     | null: false       |
-| description        | text       | null: false       |
-| category           | string     | null: false       |
-| status             | string     | null: false       |
-| delivery_fee       | string     | null: false       |
-| origin_of_delivery | string     | null: false       |
-| days               | string     | null: false       |
-| price              | integer    | null: false       |
-| user               | references | foreign_key: true |
+| Column                | Type       | Options           |
+| --------------------- | ---------- | ----------------- |
+| name                  | string     | null: false       |
+| description           | text       | null: false       |
+| category_id           | integer    | null: false       |
+| status_id             | string     | null: false       |
+| delivery_fee_id       | string     | null: false       |
+| prefecture_id         | string     | null: false       |
+| days_id               | string     | null: false       |
+| price                 | integer    | null: false       |
+| user                  | references | foreign_key: true |
 
 ### Association
 - has_one_attached :image
