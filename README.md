@@ -18,51 +18,39 @@
 
 - has_many :items
 - has_many :orders
-- has_many :comments
 
 ## items テーブル
 
-| Column         | Type       | Options           |
-| -------------- | ---------- | ----------------- |
-| name           | string     | null: false       |
-| description    | text       | null: false       |
-| price          | integer    | null: false       |
-| category       | string     | null: false       |
-| status         | string     | null: false       |
-| user_id        | references | foreign_key: true |
+| Column             | Type       | Options           |
+| ------------------ | ---------- | ----------------- |
+| name               | string     | null: false       |
+| description        | text       | null: false       |
+| category           | string     | null: false       |
+| status             | string     | null: false       |
+| delivery_fee       | string     | null: false       |
+| origin_of_delivery | string     | null: false       |
+| days               | string     | null: false       |
+| price              | integer    | null: false       |
+| user               | references | foreign_key: true |
 
 ### Association
 - has_one_attached :image
 - belongs_to :user
-- has_one :shipping_condition
-- has_one :orders
-- has_many :comments
-
-## comments テーブル
-
-| Column         | Type       | Options           |
-| -------------- | ---------- | ----------------- |
-| text           | text       | null: false       |
-| user_id        | references | foreign_key: true |
-| item_id        | references | foreign_key: true |
-
-### Association
-- belongs_to :item
-- belongs_to :user
-
+- has_one :order
 
 ## orders テーブル
 
 | Column         | Type       | Options           |
 | -------------- | ---------- | ----------------- |
-| user_id        | references | foreign_key: true |
-| item_id        | references | foreign_key: true |
+| user           | references | foreign_key: true |
+| item           | references | foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_one :item
+- belongs_to :item
+- has_one :address
 
-## destinations テーブル
+## addresses テーブル
 
 | Column         | Type       | Options           |
 | -------------- | ---------- | ----------------- |
@@ -71,20 +59,8 @@
 | city           | string     | null: false       |
 | district       | string     | null: false       |
 | building       | string     |                   |
-| tel            | integer    | null: false       |
-| order_id       | references | foreign_key: true |
+| tel            | string     | null: false       |
+| order          | references | foreign_key: true |
 
 ### Association
-- has_one :order
-
-## shipping_conditions テーブル
-
-| Column             | Type       | Options           |
-| ------------------ | ---------- | ----------------- |
-| delivery_fee       | string     | null: false       |
-| origin_of_delivery | string     | null: false       |
-| days               | string     | null: false       |
-| item_id            | references | foreign_key: true |
-
-### Association
-- has_one :item
+- belongs_to :order
