@@ -2,11 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable
+  :recoverable, :rememberable, :validatable
 
   PASSWORD_REGIX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
 
-  validates :email, presence: true, uniqueness: true
+  # validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true,
   length: { minimum:6, allow_blank: true}, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: "is invalid. Include both letters and numbers" }
   validates :password_confirmation, presence: true
