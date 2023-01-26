@@ -29,27 +29,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'category_idが空の場合は出品できない' do
-        @item.category_id = ''
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'status_idが空の場合は出品できない' do
-        @item.status_id = ''
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it 'delivery_fee_idが空の場合は出品できない' do
-        @item.delivery_fee_id = ''
+        @item.delivery_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
       it 'prefecture_idが空の場合は出品できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'daysが空の場合は出品できない' do
-        @item.days_id = ''
+        @item.days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
       end
@@ -70,6 +70,11 @@ RSpec.describe Item, type: :model do
       end
       it 'priceが10,000,000以上の場合は出品できない' do
         @item.price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid')
+      end
+      it 'priceが半角数字以外が含まれている場合は出品できない' do
+        @item.price = 'a10000'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is invalid')
       end
