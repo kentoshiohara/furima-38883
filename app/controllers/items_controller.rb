@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -7,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(items_params)
+    @item = Item.new(items_params)
     if @item.save
       redirect_to action: :index
     else
