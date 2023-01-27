@@ -29,17 +29,16 @@ class ItemsController < ApplicationController
     else
       redirect_to root_path
     end
-  end 
-  
+  end
+
   def update
     @item = Item.find(params[:id])
     if @item.update(items_params)
-       redirect_to action: :show
+      redirect_to action: :show
     else
       render :edit
     end
   end
-
 
   private
 
