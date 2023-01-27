@@ -38,6 +38,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    if @item.user == current_user
+       @item.destroy
+       redirect_to action: :index
+    else
+      render :show
+    end
+  end
+
   private
 
   def items_params
