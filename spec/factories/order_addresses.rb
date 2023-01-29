@@ -5,9 +5,7 @@ FactoryBot.define do
     prefecture_id  { 2 }
     city           { Faker::Address.city }
     district       { Faker::Address.street_address }
+    building       { Faker::Address.community }
     tel            { '0000000000' }
-
-    association :user_id
-    association :item_id
   end
 end
