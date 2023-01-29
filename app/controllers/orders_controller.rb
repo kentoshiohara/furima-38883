@@ -1,14 +1,12 @@
 class OrdersController < ApplicationController
   before_action :move_to_index, only: [:index, :edit]
+  before_action :set_items, only: [:index, :create]
 
   def index
-    # @order = Order.new
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -18,8 +16,11 @@ class OrdersController < ApplicationController
       render 'index'
     end
   end
-
+  
   private
+  def set_items
+    @item = Item.find(params[:item_id])
+  end 
 
   def order_params
     params.require(:order_address).permit(:postal_code, :prefecture_id, :city, :district, :building, :tel).merge(
@@ -38,8 +39,12 @@ class OrdersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    return if user_signed_in? && @item.order.nil?
-
-    redirect_to new_user_session_path
+    if user_signed_in? 
+      if @item.order?
+        redirect_to root_path
+      end
+    else
+      redirect_to new_user_session_path
+    end 
   end
 end
