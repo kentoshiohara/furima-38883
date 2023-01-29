@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   def move_to_index
     @item = Item.find(params[:item_id])
     if user_signed_in? 
-      if @item.order?
+      if @item.order.present?
         redirect_to root_path
       end
     else
